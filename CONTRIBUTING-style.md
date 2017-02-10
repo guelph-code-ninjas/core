@@ -1,10 +1,11 @@
 Coding & Document Style Guide
 ==================
 
-1. Coding Style
----------------
-2. Document Style
------------------
+[1. Coding Style] (#coding-style)
+----------------
+[2. Document Style](#document-style)
+------------------
+
 
 Referenced material for additional information: [PSR-0], [PSR-1], [PSR-2], [PSR-4].
 
@@ -14,6 +15,7 @@ Referenced material for additional information: [PSR-0], [PSR-1], [PSR-2], [PSR-
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md#4-classes-properties-and-methods
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
+# Coding Style
 1. Overview
 -----------
 
@@ -589,4 +591,54 @@ $foo->bar(
 );
 ~~~
 
+# Document Style
 
+Overview
+--------
+
+- Documents MUST contain proper headings and sub-headings.
+
+- Documents MUST have no grammar/spelling mistakes.
+
+- Documentation MUST be made using Markdown.
+
+- Documents MUST be consistent.
+
+- Documents COULD contain anchor tags.
+
+- Documents SHOULD not have more than 80 characters per line.
+
+- Documents SHOULD contain an overview of the contents.
+
+- Documents SHOULD contain links to materials referenced.
+
+- Documents MUST NOT be useless.
+
+
+
+Example of consistent headings/sub-headings:
+~~~
+2. General
+----------
+
+### 2.1. Basic Coding Standard
+
+Code MUST be great.
+
+### 2.2. Files
+
+Files MUST be Great.
+~~~
+
+
+Example of inline code and linking:
+~~~
+PHP [keywords] MUST be in lower case.
+
+The PHP constants `true`, `false`, and `null` MUST be in lower case.
+
+[keywords]: http://php.net/manual/en/reserved.keywords.php
+~~~
+
+
+For more information visit: https://daringfireball.net/projects/markdown/syntax
