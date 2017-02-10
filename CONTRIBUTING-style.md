@@ -1,5 +1,10 @@
-Coding Style Guide
+Coding & Document Style Guide
 ==================
+
+1. Coding Style
+---------------
+2. Document Style
+-----------------
 
 Referenced material for additional information: [PSR-0], [PSR-1], [PSR-2], [PSR-4].
 
