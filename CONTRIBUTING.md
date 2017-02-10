@@ -5,12 +5,12 @@ This section of the standard comprises what should be considered the standard
 coding elements that are required to ensure a high level of technical
 interoperability between shared PHP code.
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119].
+Referenced material for additional information: [PSR-0], [PSR-1], [PSR-2], [PSR-4].
 
 [RFC 2119]: http://www.ietf.org/rfc/rfc2119.txt
 [PSR-0]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md#4-classes-properties-and-methods
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
 
@@ -24,8 +24,6 @@ interpreted as described in [RFC 2119].
 - Files SHOULD *either* declare symbols (classes, functions, constants, etc.)
   *or* cause side-effects (e.g. generate output, change .ini settings, etc.)
   but SHOULD NOT do both.
-
-- Namespaces and classes MUST follow an "autoloading" PSR: [[PSR-0], [PSR-4]].
 
 - Class names MUST be declared in `StudlyCaps`.
 
@@ -106,9 +104,7 @@ if (! function_exists('bar')) {
 3. Namespace and Class Names
 ----------------------------
 
-Namespaces and classes MUST follow an "autoloading" PSR: [[PSR-0], [PSR-4]].
-
-This means each class is in a file by itself, and is in a namespace of at
+Each class is in a file by itself, and is in a namespace of at
 least one level: a top-level vendor name.
 
 Class names MUST be declared in `StudlyCaps`.
