@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Test Course</div>
+                <div class="panel-heading">Course {{$courseID}}: Assignment {{$assignmentID}}</div>
 
                 <div class="panel-body">
-                    Assignemnt 1
+                    Information
                 </div>
 
             </div>
