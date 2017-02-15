@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -10,7 +11,6 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -20,5 +20,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Course::class, function (Faker\Generator $faker) {
+
+    $name = function() use ($faker) {
+        $prefix = ['CIS', 'MATH', 'STAT'];
+        return $faker->randomElement($prefix) . $faker->randomNumber(4);
+    };
+
+    $n = $name();
+    return [
+        'name'  => $n,
+        'slug'  => $n,
     ];
 });
