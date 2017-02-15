@@ -17,7 +17,7 @@ class AssignmentController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the given assignment.
      *
      * @return \Illuminate\Http\Response
      */
