@@ -26,6 +26,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Course::class, function (Faker\Generator $faker) {
 
+    // Ideally we should be adding adding this as a provider to the faker
+    // https://github.com/fzaninotto/Faker/#faker-internals-understanding-providers
     $name = function() use ($faker) {
         $prefix = ['CIS', 'MATH', 'STAT'];
         return $faker->randomElement($prefix) . $faker->randomNumber(4);
