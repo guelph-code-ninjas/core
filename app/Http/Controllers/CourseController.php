@@ -17,7 +17,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the given course.
      *
      * @return \Illuminate\Http\Response
      */
