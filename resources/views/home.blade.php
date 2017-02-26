@@ -17,7 +17,7 @@
             <div class="col-md-8 col-md-offset-4">
                 <label class="btn btn-primary" for="my-file-selector">
                     <input id="my-file-selector" type="file" style="display:none;">
-                        Open Document
+                        Upload Document
                 </label>
             </div>
         </div>
