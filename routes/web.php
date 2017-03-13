@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@index');
+
+Route::get('course/{courseID}','CourseController@show');
+
+Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
+
+Auth::routes();
