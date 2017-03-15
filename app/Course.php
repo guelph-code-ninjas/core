@@ -17,8 +17,16 @@ class Course extends Model
     public function register(User $user, $role) {
         $this->persons()->attach($user->id,['role' => $role]); 
     }
-    // Three  additonal different tables are required for the following 
-    // relationships. We can reduce this to one table with a column
-    // that stores the user's role.
-    //
+
+    public function assignments()
+    {
+        return $this->hasMany('App\Assignment');
+    }
+
+    public function newAssignment(Assignment $assignment)
+    {
+        //register the assignment relationship;
+        $assignment->course_id = $this->id;
+        $assignment->save();
+    }
 }

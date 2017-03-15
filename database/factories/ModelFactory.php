@@ -39,3 +39,21 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
         'slug'  => $n,
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Assignment::class, function(Faker\Generator $faker) {
+    $name = "A". $faker->randomNumber(1);
+    $desc = $faker->sentences($faker->randomNumber(2), true);
+    //TODO: make sure $start < $end
+    $start = $faker->dateTime();
+    $end = $faker->dateTime();
+
+    return [
+        'name' => $name,
+        'slug' => $name,
+        'description' => $desc,
+        'start' => $start,
+        'due' => $end,
+    ];
+});
+
