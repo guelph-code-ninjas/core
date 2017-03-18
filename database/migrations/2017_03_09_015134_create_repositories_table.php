@@ -13,13 +13,15 @@ class CreateRepositoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('repositories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('path');
-            $table->timestamps();
-            $table->enum('backend', ['git', 'svn', 'filesystem']);
-        });
+        Schema::create(
+            'repositories', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('path');
+                $table->timestamps();
+                $table->enum('backend', ['git', 'svn', 'filesystem']);
+            }
+        );
     }
 
     /**

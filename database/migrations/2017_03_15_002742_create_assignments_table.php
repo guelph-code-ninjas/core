@@ -14,18 +14,20 @@ class CreateAssignmentsTable extends Migration
     public function up()
     {
         //
-        Schema::create('assignments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('course_id')->unsigned();
-            $table->string('name');
-            $table->string('slug');
-            $table->mediumText('description');
-            $table->timestamps();
-            $table->dateTime('start');
-            $table->dateTime('due');
-            //Foreign Keys
-            $table->foreign('course_id')->references('id')->on('courses');
-        });
+        Schema::create(
+            'assignments', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('course_id')->unsigned();
+                $table->string('name');
+                $table->string('slug');
+                $table->mediumText('description');
+                $table->timestamps();
+                $table->dateTime('start');
+                $table->dateTime('due');
+                //Foreign Keys
+                $table->foreign('course_id')->references('id')->on('courses');
+            }
+        );
 
     }
 
@@ -36,6 +38,6 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('assignments');
     }
 }
