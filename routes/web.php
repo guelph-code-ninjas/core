@@ -14,8 +14,12 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('course/registration','CourseController@showRegistration');
+
 Route::get('course/{courseID}','CourseController@show');
 
 Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
+
+
 
 Auth::routes();
