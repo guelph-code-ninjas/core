@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    public function persons()
+    public function enrollments()
     {
         return $this->belongsToMany(
             'App\User', 'courses_users',
@@ -20,7 +20,7 @@ class Course extends Model
     //TODO: Extend this to allow collections
     public function register(User $user, $role) 
     {
-        $this->persons()->attach($user->id, ['role' => $role]); 
+        $this->enrollments()->attach($user->id, ['role' => $role]); 
         //We must also add submissions
         $assignments = $this->assignments()->get();
 
@@ -49,7 +49,7 @@ class Course extends Model
         //For all students in the course create a submission entry for each
         //assignment.
 
-        $students = $this->persons()->where('role', 'student')->get();
+        $students = $this->enrollments()->where('role', 'student')->get();
         foreach($students as $student) {
             $submission = Submission::create(
                 [
