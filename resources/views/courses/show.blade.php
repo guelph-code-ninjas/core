@@ -8,7 +8,7 @@
                 <div class="panel-heading">Course Name {{$courseID}}</div>
 
                 <div class="panel-body">
-                    Assignemnt 1
+                    Assignment 1
                 </div>
 
             </div>

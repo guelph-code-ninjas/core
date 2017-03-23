@@ -25,4 +25,14 @@ class CourseController extends Controller
     {
         return view('courses.show', compact('courseID'));
     }
+
+    /**
+    * Show the course registration page
+    *
+    * @return
+    */
+    public function showRegistration()
+    {
+        return view('courses.courseregistration');
+    }
 }
