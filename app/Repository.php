@@ -4,27 +4,33 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\VersionControl\VersionControl;
-use GitElephant\Repository;
+use GitElephant\Repository as GitRepository;
+use Illuminate\Support\Facades\Storage;
 
 class Repository extends Model 
 {
     protected $repo;
 
+    private function absolutePath()
+    {
+        return app()->storagePath().'/app/'.$this->path;
+    }
+
     public function repository()
     {
         //Lazy initialization
-        
         if(!$this->initialized)
         {
-            $this->repo = new Repository($this->path);
-            $this->init();
+            Storage::makeDirectory($this->path);
+            $this->repo = GitRepository::open($this->absolutePath());
+            $this->repo->init();
 
             $this->initialized = true;
         }
 
         if(is_null($this->repo))
         {
-            $this->repo = new Repository::open($this->path);
+            $this->repo = GitRepository::open($this->path);
         }
 
         return $this->repo;
