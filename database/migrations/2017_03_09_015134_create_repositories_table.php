@@ -18,8 +18,9 @@ class CreateRepositoriesTable extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->string('path');
+                $table->boolean('initialized')->default('false');
+                $table->enum('backend', ['git']);
                 $table->timestamps();
-                $table->enum('backend', ['git', 'svn', 'filesystem']);
             }
         );
     }

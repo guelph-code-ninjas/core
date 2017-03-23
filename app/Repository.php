@@ -4,30 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\VersionControl\VersionControl;
+use GitElephant\Repository;
 
 class Repository extends Model 
 {
-    //version control system
-    private $vcs;
+    protected $repo;
 
-    public function backend()
+    public function repository()
     {
-        return $this->pluck('backend');
-    }
+        //Lazy initialization
+        
+        if(!$this->initialized)
+        {
+            $this->repo = new Repository($this->path);
+            $this->init();
 
-    public function path()
-    {
-        return $this->pluck('path');
-    }
+            $this->initialized = true;
+        }
 
-    public function list($path)
-    {
-        $vcs->list($path);
-    } 
+        if(is_null($this->repo))
+        {
+            $this->repo = new Repository::open($this->path);
+        }
 
-    public function commit($actions)
-    {
-        $vcs->commit($actions);
+        return $this->repo;
     }
 
 }
