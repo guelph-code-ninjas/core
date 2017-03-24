@@ -11,6 +11,6 @@ class RepositoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Repository::class, 5)->create();
+        factory(App\Repository::class, 2)->create();
     }
 }

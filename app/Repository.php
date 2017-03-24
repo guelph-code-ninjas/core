@@ -7,11 +7,11 @@ use App\VersionControl\VersionControl;
 use GitElephant\Repository as GitRepository;
 use Illuminate\Support\Facades\Storage;
 
-class Repository extends Model 
+class Repository extends Model
 {
     protected $repo;
 
-    private function absolutePath()
+    protected function absolutePath()
     {
         return app()->storagePath().'/app/'.$this->path;
     }
@@ -19,8 +19,7 @@ class Repository extends Model
     public function repository()
     {
         //Lazy initialization
-        if(!$this->initialized)
-        {
+        if (!$this->initialized) {
             Storage::makeDirectory($this->path);
             $this->repo = GitRepository::open($this->absolutePath());
             $this->repo->init();
@@ -28,8 +27,7 @@ class Repository extends Model
             $this->initialized = true;
         }
 
-        if(is_null($this->repo))
-        {
+        if (is_null($this->repo)) {
             $this->repo = GitRepository::open($this->path);
         }
 

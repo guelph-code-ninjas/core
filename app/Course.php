@@ -24,7 +24,7 @@ class Course extends Model
         //We must also add submissions
         $assignments = $this->assignments()->get();
 
-        foreach($assignments as $assignment) {
+        foreach ($assignments as $assignment) {
             $submission = Submission::create(
                 [
                 'assignment_id' => $assignment->id,
@@ -50,7 +50,7 @@ class Course extends Model
         //assignment.
 
         $students = $this->enrollments()->where('role', 'student')->get();
-        foreach($students as $student) {
+        foreach ($students as $student) {
             $submission = Submission::create(
                 [
                 'assignment_id' => $assignment->id,

@@ -22,6 +22,7 @@ class CreateAssignmentsTable extends Migration
                 $table->string('slug');
                 $table->mediumText('description');
                 $table->timestamps();
+                $table->boolean('requiresRepository')->default(false);
                 $table->dateTime('start');
                 $table->dateTime('due');
                 //Foreign Keys

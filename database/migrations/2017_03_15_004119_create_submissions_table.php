@@ -20,10 +20,12 @@ class CreateSubmissionsTable extends Migration
                 $table->increments('id');
                 $table->integer('assignment_id')->unsigned();
                 $table->integer('user_id')->unsigned();
+                $table->integer('repository_id')->unsigned()->nullable();
                 $table->timestamps();
                 //Foreign Keys
                 $table->foreign('assignment_id')->references('id')->on('assignments');
                 $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('repository_id')->references('id')->on('repositories');
             
             }
         );
