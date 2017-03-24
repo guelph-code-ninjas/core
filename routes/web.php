@@ -18,4 +18,6 @@ Route::get('course/{courseID}','CourseController@show');
 
 Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
 
+Route::get('repository/{repository}','RepositoryController@show');
+
 Auth::routes();
