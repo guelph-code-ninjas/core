@@ -14,7 +14,8 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('course/registration','CourseController@showRegistration');
+Route::get('course/registration/','CourseController@showRegistration');
+Route::post('course/registration', 'CourseController@store');
 
 Route::get('course/{courseID}','CourseController@show');
 
