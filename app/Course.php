@@ -16,23 +16,50 @@ class Course extends Model
 
     }
 
+    private function _constraints($user, $assignment)
+    {
+        $repo_id = null;
+        if($assignment->requiresRepository)
+        {
+            //$path = 'repositories/'.$this->id.'/'.$assignment->id.'/'.$user->id.'/';
+            $path = 'repositories/'.$this->slug.'/'.$assignment->slug.'/'.$user->id.'/';
+            $name = $assignment->slug;
+
+            $repo = Repository::create(
+                [
+                'name' => $name,
+                'path' => $path,
+                'backend' => 'git', 
+                ]
+            );
+            //Initialize the repository
+            $repo->repository(); 
+            $repo_id = $repo->id;
+        }
+
+        $submission = Submission::create(
+            [
+            'assignment_id' => $assignment->id,
+            'user_id' => $user->id,
+            'repository_id' => $repo_id,
+            ]
+        );
+
+        $submission->save();
+    }
+
     // Register a user for a course
     //TODO: Extend this to allow collections
     public function register(User $user, $role) 
     {
         $this->enrollments()->attach($user->id, ['role' => $role]); 
-        //We must also add submissions
-        $assignments = $this->assignments()->get();
 
-        foreach ($assignments as $assignment) {
-            $submission = Submission::create(
-                [
-                'assignment_id' => $assignment->id,
-                'user_id' => $user->id,
-                ]
-            );
-
-            $submission->save();
+        //We must also add submissions for a student
+        if($role == 'student') {
+            $assignments = $this->assignments()->get();
+            foreach ($assignments as $assignment) {
+                $this->_constraints($user, $assignment);
+            }
         }
     }
 
@@ -51,14 +78,7 @@ class Course extends Model
 
         $students = $this->enrollments()->where('role', 'student')->get();
         foreach ($students as $student) {
-            $submission = Submission::create(
-                [
-                'assignment_id' => $assignment->id,
-                'user_id' => $student->id,
-                ]
-            );
-
-            $submission->save();
+            $this->_constraints($student, $assignment);
         }
 
     }

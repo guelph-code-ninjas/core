@@ -34,4 +34,12 @@ class Repository extends Model
         return $this->repo;
     }
 
+
+    public function commit($message) {
+        //Prehooks should be placed here.
+        $this->repository()->commit($message, true);
+        //Posthooks should be placed here.
+    }
+
+
 }
