@@ -23,6 +23,12 @@ class CreateAssignmentsTable extends Migration
                 $table->mediumText('description');
                 $table->timestamps();
                 $table->boolean('requiresRepository')->default(false);
+                //In the future, these two should be extensions of the assignment
+                //table instead of being contained within it.
+                $table->float('similarity')->default(100);
+                //The path where the ideal filesystem layout is contained.
+                $table->string('fileChecker')->default("");
+                //
                 $table->dateTime('start');
                 $table->dateTime('due');
                 //Foreign Keys
