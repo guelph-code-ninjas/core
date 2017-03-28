@@ -25,4 +25,9 @@ class AssignmentController extends Controller
     {
         return view('assignments.show', compact('courseID', 'assignmentID'));
     }
+
+    public function new($courseID)
+    {
+        return view('assignments.new');
+    }
 }

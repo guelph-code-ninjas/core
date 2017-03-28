@@ -25,4 +25,5 @@ class CourseController extends Controller
     {
         return view('courses.show', compact('courseID'));
     }
-}
+
+    
