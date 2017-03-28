@@ -35,8 +35,6 @@ class Course extends Model
                 'backend' => 'git', 
                 ]
             );
-            //Initialize the repository
-            $repo->repository(); 
             $repo_id = $repo->id;
         }
 
@@ -49,6 +47,8 @@ class Course extends Model
         );
 
         $submission->save();
+        //Initialize the repository
+        $repo->repository(); 
     }
 
     // Register a user for a course
