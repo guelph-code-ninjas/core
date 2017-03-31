@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading" style="font-size: 20px; font-weight: 400">Create New Assignment</div>
+                <div class="panel-heading" style="font-size: 20px; font-weight: 400">Create New Assignment for Course {{$courseID}}</div>
                 <div class="panel-body">
                     <div class="col-md-8 col-md-offset-2" >
                         
