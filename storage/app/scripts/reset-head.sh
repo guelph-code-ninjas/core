@@ -29,11 +29,6 @@ fi
 update_wc() {
 	ref=$1
 	echo "Push to checked out branch $ref" >&2
-	if [ ! -f $GIT_DIR/logs/HEAD ]
-	then
-		echo "E:push to non-bare repository requires a HEAD reflog" >&2
-		exit 1
-	fi
 	if (cd $GIT_WORK_TREE; git diff-files -q --exit-code >/dev/null)
 	then
 		wc_dirty=0

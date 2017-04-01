@@ -24,7 +24,7 @@ class Repository extends Model
         $this->repo->init();
 
         //copy the post-update hook into the repository.
-        $postUpdate = Storage::get('scripts/post-update');
+        $env = Storage::get('scripts/env');
         //We're starting to tie repositories directly to an assignment.
         //It should be broken up into a generic repository and
         //an AssignmentRepository.
@@ -41,14 +41,29 @@ class Repository extends Model
             ];
 
         foreach($parameters as $key => $value) {
-            $postUpdate = str_replace($key, $value, $postUpdate);
+            $env = str_replace($key, $value, $env);
         }
 
-        $hookPath = $this->path.'.git/hooks/';
-        Storage::put($hookPath.'post-update', $postUpdate);
 
         $fs = new FileSystem();
+        $hookPath = $this->path.'.git/hooks/';
+
+        /*GIT Repo config*/
+        $file = Storage::get('scripts/config');
+        $configPath = $this->path.'.git/';
+        Storage::put($configPath.'config', $file);
+        /*Git Environment*/
+        Storage::put($hookPath.'env', $env);
+
+        /*Post-update Hook*/
+        $file = Storage::get('scripts/post-update');
+        Storage::put($hookPath.'post-update', $file);
         $fs->chmod($this->absolutePath().'/.git/hooks/post-update', 0755);
+        /*post-commit hook*/
+        $file = Storage::get('scripts/post-commit');
+        Storage::put($hookPath.'post-commit', $file);
+        $fs->chmod($this->absolutePath().'/.git/hooks/post-commit', 0755);
+
 
         $this->initialized = true;
     }

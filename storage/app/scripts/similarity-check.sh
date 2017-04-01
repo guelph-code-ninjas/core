@@ -3,6 +3,6 @@ curl http://localhost:4910/check \
   -d "{\"assignmentId\": \"$ASSIGNMENT_ID\",
        \"threshold\": $SIMILARITY_THRESHOLD,
        \"studentId\": \"$STUDENT_ID\",
-       \"directory\": \"$SUBMISSION_DIR\",
+       \"directory\": \"$ASSIGNMENT_DIR\",
        \"language\": \"c\"}" \
   --header "Content-Type:application/json"

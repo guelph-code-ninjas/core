@@ -1,18 +1,10 @@
 #!/bin/bash
 #This script must be preprocessed before use and any identifiers prefixed and
 #postfixed with __ must be replaced.
-
-export LARAVEL_STORAGE=__LARAVEL_STORAGE__
-export STUDENT_ID=__STUDENT_ID__
-export ASSIGNMENT_ID=__ASSIGNMENT_ID__
-export SUBMISSION_DIR=__SUBMISSION_DIR__
-export SIMILARITY_THRESHOLD=__SIMILARITY_THRESHOLD__
-
-#This will allow us to keep the scripts in one location.
-export PATH="${LARAVEL_STORAGE}/app/scripts:$PATH"
+. ./hooks/env
 
 #Reset the respository since it's not a bare git repo.
-reset-head.sh
+reset-head.sh $1
 
 #Call the similarity checker
 similarity-check.sh
