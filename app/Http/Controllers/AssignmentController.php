@@ -30,4 +30,10 @@ class AssignmentController extends Controller
     {
         return view('assignments.new', compact('courseID'));
     }
+
+    public function store(Request $request)
+    {
+        $a = new Assignment;
+        
+    }
 }

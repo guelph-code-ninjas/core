@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index');
 Route::get('course/{courseID}','CourseController@show');
 
 Route::get('course/{courseID}/assignment/new', 'AssignmentController@new');
+Route::post('course/{courseID}/assignment/new', 'AssignmentController@store');
 
 Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
 

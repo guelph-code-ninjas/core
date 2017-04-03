@@ -8,10 +8,10 @@
                 <div class="panel-heading" style="font-size: 20px; font-weight: 400">Create New Assignment for Course {{$courseID}}</div>
                 <div class="panel-body">
                     <div class="col-md-8 col-md-offset-2" >
-                        <form>
+                        <form method="POST" action="{{url({{$courseID}}/assingment/">
                             <div class="form-group">
                                 <label for="newAssignmentName">Assignment Name</label>
-                                <input type="text" class="form-control" id="newAssignmentName" required>
+                                <input type="text" name="aName" class="form-control" id="newAssignmentName" required>
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDueDate">Due Date:</label>
