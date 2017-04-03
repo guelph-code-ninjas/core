@@ -8,11 +8,10 @@
                 <div class="panel-heading" style="font-size: 20px; font-weight: 400">Create New Assignment for Course {{$courseID}}</div>
                 <div class="panel-body">
                     <div class="col-md-8 col-md-offset-2" >
-                        
                         <form>
                             <div class="form-group">
                                 <label for="newAssignmentName">Assignment Name</label>
-                                <input type="text" class="form-control" id="newAssignmentName" placeholder="Ex. username@mail.uoguelph.ca" required>
+                                <input type="text" class="form-control" id="newAssignmentName" required>
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDueDate">Due Date:</label>
@@ -30,38 +29,39 @@
                                 <textarea class="form-control" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="inputFile">Upload a document:</label>
-                                <input type="file" class="form-control-file" id="inputFile" aria-describedby="fileHelp" multiple>
-                                <small id="fileHelp" class="form-text text-muted">Expected file types: .zip, .tar, .tar.gz, .rar, .doc, .docx, .pdf</small>
+                                <label>Expected file types required:</label>
                             </div>
                             <div class="form-group">
-                                <a class="btn btn-primary" type="submit">Create</a>
+                                <label for="inputFile">Upload a document:</label>
+                                <input type="file" class="form-control-file" id="inputFile" multiple>
                             </div>
                         </form>
-
-                        <script type="text/javascript">
-                        function similarityUpdate(currentValue) {
-                            var sv = document.querySelector('#similarityValue');
-                            var lb = document.querySelector('#test');
-
-                            sv.value = currentValue;
-                            sv.innerHTML = sv.innerHTML + "%";
-                            if(currentValue < 33){
-                                lb.innerHTML = "Strict";
-                                lb.style.color = "red";
-                            }else if(currentValue < 66){
-                                lb.innerHTML = "Reasonable";
-                                lb.style.color = "#ffd800";
-                            }else{
-                                lb.innerHTML = "Lenient";
-                                lb.style.color = "green";
-                            }
-                        }
-                        </script>
+                        <div class="form-group">
+                            <a class="btn btn-primary" type="submit">Create</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function similarityUpdate(currentValue) {
+    var sv = document.querySelector('#similarityValue');
+    var lb = document.querySelector('#test');
+
+    sv.value = currentValue;
+    sv.innerHTML = sv.innerHTML + "%";
+    if(currentValue < 33){
+        lb.innerHTML = "Strict";
+        lb.style.color = "red";
+    }else if(currentValue < 66){
+        lb.innerHTML = "Reasonable";
+        lb.style.color = "#ffd800";
+    }else{
+        lb.innerHTML = "Lenient";
+        lb.style.color = "green";
+    }
+}
+</script>
 @endsection
