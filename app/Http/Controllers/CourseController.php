@@ -43,10 +43,18 @@ class CourseController extends Controller
 
         // sanitize the slug
 
+        // create slug
+        $slug = $request->courseName . '_' . $request->courseSemester . '_' . $request->courseSection;
         //store data into the database
         $c = new Course;
         $c->name = $request->courseName;
-        $c->slug = $request->courseID; 
+        $c->slug = $slug; 
         $c->save();
+
+      //  $url = route('course', ['courseID' => 1]);
+        $url = route('home');
+        return redirect()->route('home');
+
+       // return redirect()->route('course');
     }
 }
