@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -31,9 +32,15 @@ class AssignmentController extends Controller
         return view('assignments.new', compact('courseID'));
     }
 
-    public function store(Request $request)
+    public function store($courseID, Request $request)
     {
         $a = new Assignment;
-        
+        $a->course_id = $courseID;
+        $a->slug = $request->aName;
+        $a->description = $request->aDescription;
+        $a->start = $request->aDueDate;
+        $a->due = $request->aDueDate;
+        $a->name = $request->aName;
+        $a->save();
     }
 }

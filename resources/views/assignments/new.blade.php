@@ -8,14 +8,15 @@
                 <div class="panel-heading" style="font-size: 20px; font-weight: 400">Create New Assignment for Course {{$courseID}}</div>
                 <div class="panel-body">
                     <div class="col-md-8 col-md-offset-2" >
-                        <form method="POST" action="{{url({{$courseID}}/assingment/">
+                        <form method="POST" role="form" action="{{ url ('course/1/assignment/new') }}">
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="newAssignmentName">Assignment Name</label>
                                 <input type="text" name="aName" class="form-control" id="newAssignmentName" required>
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDueDate">Due Date:</label>
-                                <input type="datetime-local" class="form-control" id="newAssignmentDueDate" aria-describedby="duedateHelp"/>
+                                <input type="datetime-local" name="aDueDate" class="form-control" id="newAssignmentDueDate" aria-describedby="duedateHelp"/>
                                 <small id="duedateHelp" class="form-text text-muted">YYYY-MM-DD - HH:MM - AM/PM</small>
                             </div>
                             <div class="form-group">
@@ -26,7 +27,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDescription">Assignment Description</label>
-                                <textarea class="form-control" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5"></textarea>
+                                <textarea class="form-control" name="aDescription" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Expected file types required:</label>
@@ -35,10 +36,10 @@
                                 <label for="inputFile">Upload a document:</label>
                                 <input type="file" class="form-control-file" id="inputFile" multiple>
                             </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div>
                         </form>
-                        <div class="form-group">
-                            <a class="btn btn-primary" type="submit">Create</a>
-                        </div>
                     </div>
                 </div>
             </div>
