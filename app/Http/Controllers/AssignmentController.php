@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Assignment;
+use App\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class AssignmentController extends Controller
 {
@@ -22,9 +24,28 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($courseID, $assignmentID)
+    public function show(Course $course, Assignment $assignment)
     {
-        return view('assignments.show', compact('courseID', 'assignmentID'));
+
+        //$c = Course::where('id', $courseID)->get()[0];
+        //$a = $c->assignments()->get();
+        //$a = Assignment::where('id', $assignmentID)->get()[0];
+        $a = $course->assignments()->where('id', $assignment->id)->get();
+
+        if($a->isEmpty()){
+            //Throw 404
+            abort('404');
+        }
+
+        //Assignment variables
+        $aName = $assignment->name;
+        $aDescription = $assignment->description;
+        $aDue = $assignment->due;
+
+        //Course variables
+        $cName = $course->name;
+        
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue'));
     }
 
     public function new($courseID)
