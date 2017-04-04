@@ -62,9 +62,10 @@ class AssignmentController extends Controller
         if($course->id == 0){
             abort(404);
         }
-        if($request->aDueDate < Carbon::now()){
+        if($request->aName == "" || $request->aDescription == "" || $request->aDueDate < Carbon::now()){
             return back()->withInput();
         }
+
         $a->course_id = $course->id;
         $a->slug = $request->aName;
         $a->description = $request->aDescription;
