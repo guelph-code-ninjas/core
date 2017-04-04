@@ -6,6 +6,7 @@ use App\Assignment;
 use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class AssignmentController extends Controller
 {
@@ -41,11 +42,12 @@ class AssignmentController extends Controller
         $aName = $assignment->name;
         $aDescription = $assignment->description;
         $aDue = $assignment->due;
+        $aStart = $assignment->start;
 
         //Course variables
         $cName = $course->name;
 
-        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue'));
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart'));
     }
 
     public function new(Course $course)
@@ -60,11 +62,13 @@ class AssignmentController extends Controller
         if($course->id == 0){
             abort(404);
         }
-
+        if($request->aDueDate < Carbon::now()){
+            return back()->withInput();
+        }
         $a->course_id = $course->id;
         $a->slug = $request->aName;
         $a->description = $request->aDescription;
-        $a->start = $request->aDueDate;
+        $a->start = Carbon::now();
         $a->due = $request->aDueDate;
         $a->name = $request->aName;
         $a->save();

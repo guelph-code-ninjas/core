@@ -12,7 +12,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="newAssignmentName">Assignment Name</label>
-                                <input type="text" name="aName" class="form-control" id="newAssignmentName" required>
+                                <input type="text" name="aName" class="form-control" value="{{ old('aName') }}" id="newAssignmentName" required>
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDueDate">Due Date:</label>
@@ -27,7 +27,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDescription">Assignment Description</label>
-                                <textarea class="form-control" name="aDescription" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5"></textarea>
+                                <textarea class="form-control" name="aDescription" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5">
+                                    {{ Input::old('aDescription') }}
+                                </textarea>
                             </div>
                             <div class="form-group">
                                 <label>Expected file types required:</label>

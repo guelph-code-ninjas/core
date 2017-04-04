@@ -17,6 +17,9 @@
                     <strong>Similarity Acceptance Threshold:</strong><br>
                     30%<br><br>
 
+                    <strong>Assignment Created:</strong><br>
+                    {{$aStart}}<br><br>
+
                     <strong>Deadline:</strong><br>
                     {{$aDue}}
 
