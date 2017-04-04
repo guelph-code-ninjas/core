@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel-heading" style="font-size: 20px; font-weight: 400">Course {{$courseID}}</div><hr style="margin-top:0px">
+            <div class="panel-heading" style="font-size: 20px; font-weight: 800">Course {{$courseID}}</div><hr style="margin-top:0px">
         </div>
         <div class="col-md-8">
             <div class="panel panel-default">
