@@ -55,12 +55,14 @@
                                     <input type="checkbox" style="margin-left:8px">
                                     .tar.gz
                                 </label>
+                                <br>
+                                <label for="newAssignmentExpectedField">Other:</label>
+                                <input type="text" name="aExpected" value="{{ old('aExpected') }}" id="newAssignmentExpectedField" aria-describedby="expectedHelp">
+                                <small id="expectedHelp" class="form-text text-muted">Separate each field with a comma (,)</small>
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentDescription">Assignment Description</label>
-                                <textarea class="form-control" name="aDescription" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5" required>
-                                    {{{ Input::old('aDescription') }}}
-                                </textarea>
+                                <textarea class="form-control" name="aDescription" id="newAssignmentDescription" placeholder="Description of the assignment..." cols="50" rows="5" required>{{ Input::old('aDescription') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Expected file types required:</label>

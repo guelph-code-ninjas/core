@@ -27,14 +27,10 @@ class AssignmentController extends Controller
      */
     public function show(Course $course, Assignment $assignment)
     {
-
-        //$c = Course::where('id', $courseID)->get()[0];
-        //$a = $c->assignments()->get();
-        //$a = Assignment::where('id', $assignmentID)->get()[0];
         $a = $course->assignments()->where('id', $assignment->id)->get();
 
-        if($a->isEmpty()){
-            //Throw 404
+        if($a->isEmpty())
+        {
             abort('404');
         }
 
@@ -59,9 +55,11 @@ class AssignmentController extends Controller
     public function store(Course $course, Request $request)
     {
         $a = new Assignment;
+
         if($course->id == 0){
             abort(404);
         }
+        
         if($request->aName == "" || $request->aDescription == "" || $request->aDueDate < Carbon::now()){
             return back()->withInput();
         }

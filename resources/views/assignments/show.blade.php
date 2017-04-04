@@ -36,8 +36,7 @@
                 <div class="panel-heading">Submissions</div>
                 <div class="panel-body">
                     <strong>Previous submissions</strong><br>
-                    <a href="#">Assignment 1</a><br>
-                    <a href="#">Research Paper</a><br>
+                    <div id="test"></div>
                     <form>
                         <center><button class="btn btn-primary" type="submit" style="margin-top:10px; width: 100%">Submit New Assignment</button></center>
                     </form>
