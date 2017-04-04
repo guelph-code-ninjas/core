@@ -44,24 +44,31 @@ class AssignmentController extends Controller
 
         //Course variables
         $cName = $course->name;
-        
+
         return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue'));
     }
 
-    public function new($courseID)
+    public function new(Course $course)
     {
-        return view('assignments.new', compact('courseID'));
+        $cName = $course->name;
+        return view('assignments.new', compact('cName', 'course'));
     }
 
-    public function store($courseID, Request $request)
+    public function store(Course $course, Request $request)
     {
         $a = new Assignment;
-        $a->course_id = $courseID;
+        if($course->id == 0){
+            abort(404);
+        }
+
+        $a->course_id = $course->id;
         $a->slug = $request->aName;
         $a->description = $request->aDescription;
         $a->start = $request->aDueDate;
         $a->due = $request->aDueDate;
         $a->name = $request->aName;
         $a->save();
+
+        return redirect()->action('AssignmentController@show', [$course, $a]);
     }
 }

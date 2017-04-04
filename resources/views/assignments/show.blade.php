@@ -8,11 +8,23 @@
         </div>
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Assignment: {{$aName}}</div>
+                <div class="panel-heading" style="font-size: 20px; font-weight: 800">{{$aName}}</div>
                 <div class="panel-body">
+                    
+                    <strong>Description:</strong><br>
                     {{$aDescription}}<br><br>
+
+                    <strong>Similarity Acceptance Threshold:</strong><br>
+                    30%<br><br>
+
                     <strong>Deadline:</strong><br>
                     {{$aDue}}
+
+                </div>
+                <div class="panel-heading" style="font-size: 20px; font-weight: 800">Submission Details</div><hr style="margin:0px">
+                <div class="panel-body">
+                    Similarity<br>
+                    Errors in files etc.<br>
                 </div>
             </div>
         </div>
@@ -27,12 +39,8 @@
                         <center><button class="btn btn-primary" type="submit" style="margin-top:10px; width: 100%">Submit New Assignment</button></center>
                     </form>
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="row">
-
     </div>
 </div>
 @endsection

@@ -7,7 +7,6 @@
             <center>
                 <h1 style="font-size: 220px; font-weight: 800">404</h1><br>
                 <strong>Sorry, we couldn't find what you were looking for :(</strong>
-
             </center>
         </div>
     </div>

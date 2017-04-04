@@ -19,9 +19,11 @@ Route::post('course/registration', 'CourseController@store');
 
 Route::get('course/{courseID}','CourseController@show');
 
-Route::get('course/{courseID}/assignment/new', 'AssignmentController@new');
-Route::post('course/{courseID}/assignment/new', 'AssignmentController@store');
+Route::get('course/{course}/assignment/new', 'AssignmentController@new');
+Route::post('course/{course}/assignment/new', 'AssignmentController@store');
 
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show');
+
+
 
 Auth::routes();
