@@ -40,11 +40,23 @@ class CourseController extends Controller
     public function store(Request $request, $courseID)
     {
         // validate the input before storing it into the database
+        $this->validate($request,[
+            'courseName' => 'required',
+            'courseSemester' => 'required',
+            'courseSection' => 'required'
+        ]);
 
         // sanitize the slug
 
+        // if any of the fields are null, bring them back to the registration page (did not select an option)
+        if($request->courseName == null || $request->courseSemester == null || $request->courseSection == null) {
+
+            return back()->withInput();
+        }
+
         // create slug
         $slug = $request->courseName . '_' . $request->courseSemester . '_' . $request->courseSection;
+
         //store data into the database
         $c = new Course;
         $c->name = $request->courseName;
