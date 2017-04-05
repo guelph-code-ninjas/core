@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel-heading" style="font-size: 20px; font-weight: 800">{{$cName}}</div><hr style="margin-top:0px">
+            <div class="panel-heading" style="font-size: 20px; font-weight: 800">{{$cName}}</div>
+            <hr style="margin-top:0px">
         </div>
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -15,7 +16,7 @@
                     {{$aDescription}}<br><br>
 
                     <strong>Similarity Acceptance Threshold:</strong><br>
-                    30%<br><br>
+                    {{$aSimilarity}}%<br><br>
 
                     <strong>Assignment Created:</strong><br>
                     {{$aStart}}<br><br>

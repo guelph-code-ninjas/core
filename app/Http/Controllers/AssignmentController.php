@@ -39,11 +39,27 @@ class AssignmentController extends Controller
         $aDescription = $assignment->description;
         $aDue = $assignment->due;
         $aStart = $assignment->start;
+        $aSimilarity = $assignment->similarity;
+        $remaining = "";
 
         //Course variables
         $cName = $course->name;
 
-        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart'));
+        //Calculations
+        $currentTime = Carbon::now();
+        $interval = date_diff($currentTime, new \DateTime($aDue));
+
+        if($interval->y != 0)
+            $remaining .= "Years: " . $interval->y;
+        if($interval->m != 0)
+            $remaining .= " Months: " . $interval->m;
+        if($interval->d != 0)
+            $remaining .= " Days: " . $interval->d;
+
+        $remaining .= " - " . $interval->h . ":" . $interval->i . ":" . $interval->s;
+        //echo $interval->format('d');
+
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining'));
     }
 
     public function new(Course $course)
@@ -70,6 +86,7 @@ class AssignmentController extends Controller
         $a->start = Carbon::now();
         $a->due = $request->aDueDate;
         $a->name = $request->aName;
+        $a->similarity = $request->aSimilarity;
         $a->save();
 
         return redirect()->action('AssignmentController@show', [$course, $a]);

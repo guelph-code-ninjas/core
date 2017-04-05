@@ -21,9 +21,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="newAssignmentSimilarity">Similarity Acceptance Threshold</label>
-                                <input type="range" min="0" max="100" value="0" id="newAssignmentSimilarity" step="5" oninput="similarityUpdate(value)" required>
+                                <input type="range" name="aSimilarity" min="0" max="100" value="0" id="newAssignmentSimilarity" step="5" oninput="similarityUpdate(value)" required>
                                 <output for="newAssignmentSimilarity" id="similarityValue"></output>
-                                <label id="test"></label>
+                                <label id="similarityIndicator"></label>
                             </div>
                             <label for="newAssignmentExpected">Expected File Types</label>
                             <div class="form-group control-group" id="newAssignmentExpected">
@@ -84,7 +84,7 @@
 <script type="text/javascript">
 function similarityUpdate(currentValue) {
     var sv = document.querySelector('#similarityValue');
-    var lb = document.querySelector('#test');
+    var lb = document.querySelector('#similarityIndicator');
 
     sv.value = currentValue;
     sv.innerHTML = sv.innerHTML + "%";
