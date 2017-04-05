@@ -32,12 +32,12 @@ class CourseController extends Controller
     *
     * @return
     */
-    public function showRegistration()
+    public function new()
     {
         return view('courses.courseregistration');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $courseID)
     {
         // validate the input before storing it into the database
 
@@ -51,10 +51,6 @@ class CourseController extends Controller
         $c->slug = $slug; 
         $c->save();
 
-      //  $url = route('course', ['courseID' => 1]);
-        $url = route('home');
-        return redirect()->route('home');
-
-       // return redirect()->route('course');
+        return redirect()->action('CourseController@show', [$c->id]);
     }
 }

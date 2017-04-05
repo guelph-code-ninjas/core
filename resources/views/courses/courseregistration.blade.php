@@ -18,7 +18,7 @@
                 			<label class="control-label col-sm-4" for="course_name">Course Name:</label>
                             <div class="col-sm-4">
                                 <select class="custom-select col-sm-10 form-control" id="formCustomSelect" name="courseName">
-                                    <option selected>Choose Course</option>
+                                    <option selected disabled>Choose Course</option>
                                     <option value="CIS*1500">CIS*1500</option>
                                     <option value="CIS*1910">CIS*1910</option>
                                     <option value="CIS*3110">CIS*3110</option>
@@ -33,7 +33,7 @@
                 			<label for="course_semester" class="control-label col-sm-4">Semester:</label>
                             <div class="col-sm-4">
                                 <select class="custom-select col-sm-10 form-control" id="formCustomSelect" for="course_semester" name="courseSemester">
-                                    <option selected>Choose Semester</option>
+                                    <option selected disabled>Choose Semester</option>
                                     <option value="S16">S16</option>
                                     <option value="F16">F16</option>
                                     <option value="W17">W17</option>
@@ -48,7 +48,7 @@
                             <label for="course_id" class="control-label col-sm-4">Section:</label>
                             <div class="col-sm-4">
                                 <select class="custom-select col-sm-10 form-control" id="formCustomSelect" for="course_semester" name="courseSection">
-                                    <option selected>Choose Section</option>
+                                    <option selected disabled>Choose Section</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
                                     <option value="03">03</option>

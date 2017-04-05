@@ -12,12 +12,12 @@
 */
 
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 
-Route::get('course/registration/','CourseController@showRegistration');
-Route::post('course/registration', 'CourseController@store');
+Route::get('course/registration/','CourseController@new');
+Route::post('course/{courseID}', 'CourseController@store');
 
-Route::get('course/{courseID}','CourseController@show')->name('course');
+Route::get('course/{courseID}','CourseController@show');
 
 Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
 
