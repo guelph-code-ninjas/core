@@ -5,29 +5,42 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\VersionControl\VersionControl;
 
-class Repository extends Model 
+use GitElephant\Repository as GitRepository;
+use Illuminate\Support\Facades\Storage;
+
+class Repository extends Model
 {
-    //version control system
-    private $vcs;
+    protected $repo;
 
-    public function backend()
+    protected function absolutePath()
     {
-        return $this->pluck('backend');
+        return app()->storagePath().'/app/'.$this->path;
     }
 
-    public function path()
+    public function repository()
     {
-        return $this->pluck('path');
+        //Lazy initialization
+        if (!$this->initialized) {
+            Storage::makeDirectory($this->path);
+            $this->repo = GitRepository::open($this->absolutePath());
+            $this->repo->init();
+
+            $this->initialized = true;
+        }
+
+        if (is_null($this->repo)) {
+            $this->repo = GitRepository::open($this->path);
+        }
+
+        return $this->repo;
     }
 
-    public function list($path)
-    {
-        $vcs->list($path);
-    } 
 
-    public function commit($actions)
-    {
-        $vcs->commit($actions);
+    public function commit($message) {
+        //Prehooks should be placed here.
+        $this->repository()->commit($message, true);
+        //Posthooks should be placed here.
     }
+
 
 }

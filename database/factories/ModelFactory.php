@@ -28,7 +28,8 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
 
     // Ideally we should be adding adding this as a provider to the faker
     // https://github.com/fzaninotto/Faker/#faker-internals-understanding-providers
-    $name = function() use ($faker) {
+
+    $name = function () use ($faker) {
         $prefix = ['CIS', 'MATH', 'STAT'];
         return $faker->randomElement($prefix) . $faker->randomNumber(4);
     };
@@ -44,9 +45,15 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
 $factory->define(App\Assignment::class, function(Faker\Generator $faker) {
     $name = "A". $faker->randomNumber(1);
     $desc = $faker->sentences($faker->randomNumber(2), true);
-    //TODO: make sure $start < $end
+
     $start = $faker->dateTime();
     $end = $faker->dateTime();
+
+    if ($end < $start) {
+        $swap = $end;
+        $end = $start;
+        $start = $end;
+    }
 
     return [
         'name' => $name,
@@ -57,3 +64,15 @@ $factory->define(App\Assignment::class, function(Faker\Generator $faker) {
     ];
 });
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Repository::class, function (Faker\Generator $faker) {
+    $name = "A". $faker->randomNumber(1);
+    $start = $faker->dateTime();
+    $end = $faker->dateTime();
+
+    return [
+        'name' => $name,
+        'path' => 'repositories/'.$name,
+        'backend' => 'git',
+    ];
+});

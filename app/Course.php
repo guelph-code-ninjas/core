@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'slug',    
-    ];
 
-    public function persons()
+    protected $fillable = [
+         'name', 'slug',    
+    ];
+    public function enrollments()
     {
         return $this->belongsToMany(
             'App\User', 'courses_users',
@@ -25,23 +20,50 @@ class Course extends Model
 
     }
 
+    private function _constraints($user, $assignment)
+    {
+        $repo_id = null;
+        if($assignment->requiresRepository)
+        {
+            //$path = 'repositories/'.$this->id.'/'.$assignment->id.'/'.$user->id.'/';
+            $path = 'repositories/'.$this->slug.'/'.$assignment->slug.'/'.$user->id.'/';
+            $name = $assignment->slug;
+
+            $repo = Repository::create(
+                [
+                'name' => $name,
+                'path' => $path,
+                'backend' => 'git', 
+                ]
+            );
+            //Initialize the repository
+            $repo->repository(); 
+            $repo_id = $repo->id;
+        }
+
+        $submission = Submission::create(
+            [
+            'assignment_id' => $assignment->id,
+            'user_id' => $user->id,
+            'repository_id' => $repo_id,
+            ]
+        );
+
+        $submission->save();
+    }
+
     // Register a user for a course
     //TODO: Extend this to allow collections
     public function register(User $user, $role) 
     {
-        $this->persons()->attach($user->id, ['role' => $role]); 
-        //We must also add submissions
-        $assignments = $this->assignments()->get();
+        $this->enrollments()->attach($user->id, ['role' => $role]); 
 
-        foreach($assignments as $assignment) {
-            $submission = Submission::create(
-                [
-                'assignment_id' => $assignment->id,
-                'user_id' => $user->id,
-                ]
-            );
-
-            $submission->save();
+        //We must also add submissions for a student
+        if($role == 'student') {
+            $assignments = $this->assignments()->get();
+            foreach ($assignments as $assignment) {
+                $this->_constraints($user, $assignment);
+            }
         }
     }
 
@@ -58,16 +80,16 @@ class Course extends Model
         //For all students in the course create a submission entry for each
         //assignment.
 
-        $students = $this->persons()->where('role', 'student')->get();
-        foreach($students as $student) {
-            $submission = Submission::create(
-                [
-                'assignment_id' => $assignment->id,
-                'user_id' => $student->id,
-                ]
-            );
-
-            $submission->save();
+        $students = $this->enrollments()->where('role', 'student')->get();
+        foreach ($students as $student) {
+            $this->_constraints($student, $assignment);
         }
+
+    }
+
+    //This changes the URL to return the slug rather than the ID
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

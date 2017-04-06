@@ -8,19 +8,15 @@
                 <div class="panel-heading">Test Course</div>
 
                 <div class="panel-body">
-                    Assignment 1
 
                     <div class="form-group">
                     <div class="col-md-8 col-md-offset-4" >
-                        <a class="btn btn-primary" type="submit" href="{{ url('/course/registration') }}">
+                        <a class="btn btn-primary" type="submit" href="{{ url('/course/register') }}">
                             Course Registration
                         </a>   
                     </div>
                 </div>
                 </div>
-                    Assignemnt 1
-                </div>
-
             </div>
         </div>
     </div>

@@ -41,7 +41,7 @@ class CoursesTableSeeder extends Seeder
             ->each(
                 function ($c) {
                     $persons = factory(App\User::class, 10)->create();
-                    $assignments = factory(App\Assignment::class, 5)->make();
+                    $assignments = factory(App\Assignment::class, 2)->make();
 
                     $c->register($persons[0], 'instructor');
                     $c->register($persons[1], 'instructor');
@@ -57,6 +57,7 @@ class CoursesTableSeeder extends Seeder
 
                     $assignments->each(
                         function ($a) use ($c) {
+                            $a->requiresRepository = true;
                             $c->newAssignment($a);
                         }
                     );

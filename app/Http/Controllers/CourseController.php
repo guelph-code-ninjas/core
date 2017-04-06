@@ -27,7 +27,7 @@ class CourseController extends Controller
         $courseID = $course->name;
         $courseSlug = $course->slug;
         
-        return view('courses.show', compact('courseID'));
+        return view('courses.show', compact('courseID', 'courseSlug'));
     }
 
     /**
@@ -35,9 +35,10 @@ class CourseController extends Controller
     *
     * @return
     */
-    public function registerCourse()
+
+    public function showRegistration()
     {
-        return view('courses.courseregistration');
+        return view('courses.register');
     }
 
     public function store(Request $request)
