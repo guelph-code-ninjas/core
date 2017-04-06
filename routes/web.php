@@ -13,10 +13,11 @@
 
 Route::get('/', 'HomeController@index');
 
+
 Route::get('/home', 'HomeController@index');
 
-Route::get('course/registration/','CourseController@showRegistration');
-Route::post('course/registration', 'CourseController@store');
+Route::get('course/register/','CourseController@showRegistration');
+Route::post('course/register/', 'CourseController@store');
 
 Route::get('course/{course}','CourseController@show');
 
