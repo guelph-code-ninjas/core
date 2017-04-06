@@ -22,8 +22,11 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($courseID)
+    public function show(Course $course)
     {
+        $courseID = $course->name;
+        $courseSlug = $course->slug;
+        
         return view('courses.show', compact('courseID'));
     }
 
@@ -32,12 +35,12 @@ class CourseController extends Controller
     *
     * @return
     */
-    public function new()
+    public function registerCourse()
     {
         return view('courses.courseregistration');
     }
 
-    public function store(Request $request, $courseID)
+    public function store(Request $request)
     {
         // validate the input before storing it into the database
         $this->validate($request,[
@@ -63,6 +66,6 @@ class CourseController extends Controller
         $c->slug = $slug; 
         $c->save();
 
-        return redirect()->action('CourseController@show', [$c->id]);
+        return redirect()->action('CourseController@show', $c);
     }
 }

@@ -14,19 +14,19 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('course/registration/','CourseController@new');
-Route::post('course/{courseID}', 'CourseController@store');
+Route::get('course/registration/','CourseController@registerCourse');
+Route::post('course/registration/', 'CourseController@store');
 
-Route::get('course/{courseID}','CourseController@show');
+Route::get('course/{course}','CourseController@show');
 
-Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
+Route::get('course/{course}/assignment/{assignmentID}','AssignmentController@show');
 
 
 
 Route::get('/', 'HomeController@index');
 
-Route::get('course/{courseID}','CourseController@show');
+Route::get('course/{course}','CourseController@show');
 
-Route::get('course/{courseID}/assignment/{assignmentID}','AssignmentController@show');
+Route::get('course/{course}/assignment/{assignmentID}','AssignmentController@show');
 
 Auth::routes();
