@@ -12,15 +12,15 @@
 */
 
 
-Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 Route::get('course/registration/','CourseController@showRegistration');
 Route::post('course/registration', 'CourseController@store');
 
 Route::get('course/{course}','CourseController@show');
 
-Route::get('course/{course}/assignment/new', 'AssignmentController@new');
-Route::post('course/{course}/assignment/new', 'AssignmentController@store');
+Route::get('course/{course}/assignment/register', 'AssignmentController@register');
+Route::post('course/{course}/assignment/register', 'AssignmentController@store');
 
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show');
 
