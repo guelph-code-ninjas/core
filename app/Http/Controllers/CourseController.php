@@ -22,8 +22,9 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($courseID)
+    public function show(Course $course)
     {
+        $courseID = $course->name;
         return view('courses.show', compact('courseID'));
     }
 
@@ -46,7 +47,7 @@ class CourseController extends Controller
         //store data into the database
         $c = new Course;
         $c->name = $request->courseName;
-        $c->slug = $request->courseID; 
+        $c->slug = $request->courseID;
         $c->save();
     }
 }

@@ -85,4 +85,10 @@ class Course extends Model
         }
 
     }
+
+    //This changes the URL to return the slug rather than the ID
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

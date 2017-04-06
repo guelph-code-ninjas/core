@@ -81,7 +81,8 @@ class AssignmentController extends Controller
         }
 
         $a->course_id = $course->id;
-        $a->slug = $request->aName;
+
+        $a->slug = str_replace(' ', '-', $request->aName);
         $a->description = $request->aDescription;
         $a->start = Carbon::now();
         $a->due = $request->aDueDate;
