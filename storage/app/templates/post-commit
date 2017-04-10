@@ -1,0 +1,11 @@
+#!/usr/bin/php
+<?php
+#include 'SimilarityHooks.php'
+include 'environment.php';
+include 'similarityChecker.php';
+
+#Call the similarity checker
+#system('similarity-check.sh');
+activateSimillarityHook($ASSIGNMENT_ID, $SIMILARITY_THRESHOLD, $STUDENT_ID, $ASSIGNMENT_DIR, "c");
+return 0;
+?>

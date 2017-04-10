@@ -1,5 +1,0 @@
-#!/bin/bash
-. ./.git/hooks/env
-
-#Call the similarity checker
-similarity-check.sh
