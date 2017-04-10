@@ -1,14 +1,14 @@
 #!/usr/bin/php
 <?php
-include 'environment.php';
-include 'similarityChecker.php';
+include './hooks/environment.php';
+include 'hooks.php';
 
-#Reset the respository since it's not a bare git repo.
-system($LARAVEL_STORAGE.'/app/scripts/reset-head.sh ' . $argv[1]);
-
-#Call the similarity checker
-activateSimillarityHook($ASSIGNMENT_ID, $SIMILARITY_THRESHOLD, $STUDENT_ID, $ASSIGNMENT_DIR, "c");
-
-#For now always indicate successs, this should be updated later
-return 0;
+return postUpdate(
+                    [
+                    'assignmentId' => $ASSIGNMENT_ID,
+                    'similarity' => $SIMILARITY_THRESHOLD,
+                    'studentId' => $STUDENT_ID,
+                    'assignmentPath' => $ASSIGNMENT_DIR,
+                    ]
+                );
 ?>

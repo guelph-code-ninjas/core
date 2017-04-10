@@ -7,12 +7,11 @@ $STUDENT_ID="__STUDENT_ID__";
 $ASSIGNMENT_ID=__ASSIGNMENT_ID__;
 $SUBMISSION_DIR="__SUBMISSION_DIR__";
 $SIMILARITY_THRESHOLD=__SIMILARITY_THRESHOLD__;
-//Clean this up
-$ASSIGNMENT_DIR=$SUBMISSION_DIR . "../";
+$ASSIGNMENT_DIR="__ASSIGNMENT_DIR__";
 
 #This will allow us to keep the scripts in one location.
 set_include_path(get_include_path() . PATH_SEPARATOR . $LARAVEL_STORAGE."/app/scripts");
-set_include_path(get_include_path() . PATH_SEPARATOR . $LARAVEL_STORAGE."/app/scripts");
+set_include_path(get_include_path() . PATH_SEPARATOR . $ASSIGNMENT_DIR."/.config");
 
 ?>
 
