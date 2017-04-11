@@ -47,14 +47,14 @@ class Repository extends Model
 
         $parameters = [
             '__LARAVEL_STORAGE__'       =>  $laravelStorage,
+            '__LARAVEL_DIR__'           =>  __DIR__,
             '__STUDENT_ID__'            =>  $userId,
             '__ASSIGNMENT_ID__'         =>  $assignmentId,
             '__SUBMISSION_DIR__'        =>  $repositoryPath,
-            '__SIMILARITY_THRESHOLD__'  =>  $assignment->similarity,
             '__ASSIGNMENT_DIR__'        =>  $assignmentPath,
             ];
 
-        foreach($parameters as $key => $value) {
+        foreach ($parameters as $key => $value) {
             $env = str_replace($key, $value, $env);
         }
 
@@ -103,7 +103,8 @@ class Repository extends Model
     }
 
 
-    public function commit($message) {
+    public function commit($message) 
+    {
         //Prehooks should be placed here.
         $this->repository()->commit($message, true);
         //Posthooks should be placed here.

@@ -1,14 +1,13 @@
 #!/usr/bin/php
 <?php
-include './.git/hooks/environment.php';
-include 'hooks.php';
+require './.git/hooks/environment.php';
+require 'hooks.php';
 
 return postCommit(
-                    [
-                    'assignmentId' => $ASSIGNMENT_ID,
-                    'similarity' => $SIMILARITY_THRESHOLD,
-                    'studentId' => $STUDENT_ID,
-                    'assignmentPath' => $ASSIGNMENT_DIR,
-                    ]
-                );
+    [
+        'assignmentId' => $ASSIGNMENT_ID,
+        'studentId' => $STUDENT_ID,
+        'assignmentPath' => $ASSIGNMENT_DIR,
+    ]
+);
 ?>

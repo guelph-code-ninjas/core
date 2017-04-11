@@ -22,8 +22,7 @@ class Course extends Model
     private function _constraints($user, $assignment)
     {
         $repo_id = null;
-        if($assignment->requiresRepository)
-        {
+        if ($assignment->requiresRepository) {
             //$path = 'repositories/'.$this->id.'/'.$assignment->id.'/'.$user->id.'/';
             $path = 'repositories/'.$this->slug.'/'.$assignment->slug.'/'.$user->id.'/';
             $name = $assignment->slug;
@@ -51,14 +50,15 @@ class Course extends Model
         $repo->repository(); 
     }
 
-    // Register a user for a course
-    //TODO: Extend this to allow collections
+    /* Register a user for a course
+    /  TODO: Extend this to allow collections
+    */
     public function register(User $user, $role) 
     {
         $this->enrollments()->attach($user->id, ['role' => $role]); 
 
         //We must also add submissions for a student
-        if($role == 'student') {
+        if ($role == 'student') {
             $assignments = $this->assignments()->get();
             foreach ($assignments as $assignment) {
                 $this->_constraints($user, $assignment);

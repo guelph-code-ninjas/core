@@ -1,6 +1,7 @@
 <?php
 //Throws an exception when unable to access the resouce.
-function activateSimillarityHook($assignment, $threshold, $student, $assignmentDir, $language)
+function activateSimillarityHook(
+    $assignment, $threshold, $student, $assignmentDir, $language)
 {
     $url = 'http://localhost:4910/check';
     $data = '{"assignmentId" : "' . $assignment . '", 

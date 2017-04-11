@@ -4,11 +4,12 @@ include './hooks/environment.php';
 include 'hooks.php';
 
 return postUpdate(
-                    [
-                    'assignmentId' => $ASSIGNMENT_ID,
-                    'similarity' => $SIMILARITY_THRESHOLD,
-                    'studentId' => $STUDENT_ID,
-                    'assignmentPath' => $ASSIGNMENT_DIR,
-                    ]
-                );
+    [
+        'assignmentId' => $ASSIGNMENT_ID,
+        'studentId' => $STUDENT_ID,
+        'assignmentPath' => $ASSIGNMENT_DIR,
+        'laravelStorage' => $LARAVEL_STORAGE
+    ],
+    $argv[1]
+);
 ?>
