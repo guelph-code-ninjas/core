@@ -1,0 +1,13 @@
+#!/usr/bin/php
+<?php
+require './.git/hooks/environment.php';
+require 'hooks.php';
+
+return postCommit(
+    [
+        'assignmentId' => $ASSIGNMENT_ID,
+        'studentId' => $STUDENT_ID,
+        'assignmentPath' => $ASSIGNMENT_DIR,
+    ]
+);
+?>
