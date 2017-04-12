@@ -68,6 +68,12 @@ class AssignmentController extends Controller
         return view('assignments.register', compact('cName', 'course'));
     }
 
+    public function settings(Course $course)
+    {
+        $cName = $course->name;
+        return view('assignments.settings', compact('cName', 'course'));
+    }
+
     public function store(Course $course, Request $request)
     {
         $a = new Assignment;

@@ -21,6 +21,7 @@ Route::post('course/registration', 'CourseController@store');
 Route::get('course/{course}','CourseController@show');
 
 Route::get('course/{course}/assignment/register', 'AssignmentController@register');
+Route::get('course/{course}/assignment/settings', 'AssignmentController@settings');
 Route::post('course/{course}/assignment/register', 'AssignmentController@store');
 
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show');
