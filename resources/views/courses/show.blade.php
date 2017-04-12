@@ -15,8 +15,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach( $assignments as $assignment)
-                            {{--<p> {{$assignment->name}} </p>--}}
-                            <a href="#" class="list-group-item">
+                            <a href="{{ route('courseAssignment', ['course' => $slug, 'assignment' => $assignment->id]) }}" method="POST" class="list-group-item">
                                 <h4 class="list-group-item-heading">{{$assignment->name}}</h4>
                                 <p class="list-group-item-text">Due: {{$assignment->due}}</p>
                             </a>
@@ -32,13 +31,7 @@
 
                 <div class="panel-body">
                     <ul class="list-group">
-                        @foreach( $assignments as $assignment)
-                            {{--<p> {{$assignment->name}} </p>--}}
-                            <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">{{$assignment->name}}</h4>
-                                <p class="list-group-item-text">Due: {{$assignment->due}}</p>
-                            </a>
-                        @endforeach
+
                     </ul>
                 </div>
             </div>

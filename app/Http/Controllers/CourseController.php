@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Assignment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -25,14 +26,12 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $assignments = DB::table('assignments')->select('name', 'due', 'similarity')->where('course_id', $course->id)->get();
-
-        /*foreach($assignments as $assignment)
-            echo $assignment;*/
+        $assignments = DB::table('assignments')->select('id', 'name', 'due', 'similarity')->where('course_id', $course->id)->get();
 
         $courseID = $course->name;
-    //    $assignment = $assignments->name;
-        return view('courses.show', compact('courseID'), ['assignments' => $assignments]);
+        $slug = $course->slug;
+
+        return view('courses.show', compact('courseID', 'slug'), ['assignments' => $assignments]);
     }
 
     /**
@@ -43,6 +42,29 @@ class CourseController extends Controller
     public function showRegistration()
     {
         return view('courses.register');
+    }
+
+    /**
+    * Show the course settings page
+    *
+    * @return
+    */
+    public function showSettings(Course $course)
+    {
+        $users = DB::table('users')->select('id', 'name', 'email')->get();
+        $courses = DB::table('courses')->select('slug')->get();
+
+        return view('courses.settings', ['users' => $users], ['courses' => $courses]);
+    }
+
+    /**
+    * Save data from settings page into database
+    *
+    * @return
+    */
+    public function storeSettings()
+    {
+        
     }
 
     /**
