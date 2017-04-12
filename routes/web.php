@@ -17,7 +17,7 @@ Route::get('/home', 'HomeController@index');
 
 /* CourseController Routes */
 Route::get('course/register/','CourseController@showRegistration');
-Route::get('course/settings', 'CourseController@showSettings');
+Route::get('course/{course}/enroll', 'CourseController@enroll');
 
 Route::post('course/register/', 'CourseController@store');
 Route::get('course/{course}','CourseController@show')->name('coursePage');

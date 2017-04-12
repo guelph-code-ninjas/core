@@ -49,12 +49,12 @@ class CourseController extends Controller
     *
     * @return
     */
-    public function showSettings(Course $course)
+    public function enroll(Course $course)
     {
         $users = DB::table('users')->select('id', 'name', 'email')->get();
         $courses = DB::table('courses')->select('slug')->get();
 
-        return view('courses.settings', ['users' => $users], ['courses' => $courses]);
+        return view('courses.enroll', ['users' => $users], ['course' => $course]);
     }
 
     /**
