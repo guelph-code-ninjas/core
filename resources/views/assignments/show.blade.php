@@ -40,7 +40,7 @@
 
                     <center><button class="btn btn-success" type="button" data-toggle="collapse" data-target="#submission" style="margin-top:10px; margin-bottom:10px; width: 100%">Submit Assignment</button></center>
 
-                    <form method="POST" role="form" action="{{ action('FileController@test', $course) }}">
+                    <form method="POST" role="form" action="{{ action('AssignmentController@test') }}">
                         <div id="submission" class="collapse">
                             <div class="form-group">
                                 <label for="submissionName">Submission Name</label>

@@ -25,6 +25,7 @@ Route::post('course/{course}/assignment/register', 'AssignmentController@store')
 
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show');
 
+Route::post('/register', 'FileController@test');
 
 
 Auth::routes();

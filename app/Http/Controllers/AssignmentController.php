@@ -15,6 +15,10 @@ class AssignmentController extends Controller
      *
      * @return void
      */
+    public function test(){
+        return view('assignments.test');
+    }
+
     public function __construct()
     {
         $this->middleware('auth');
