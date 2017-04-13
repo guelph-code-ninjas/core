@@ -12,9 +12,9 @@
 
                     <div class="form-group">
                     <div class="col-md-8 col-md-offset-4" >
-                        <a class="btn btn-primary" type="submit" href="{{ url('/course/registration') }}">
+                        <a class="btn btn-primary" type="submit" href="{{ url('/course/register') }}">
                             Course Registration
-                        </a>   
+                        </a>
                     </div>
                 </div>
                 </div>
