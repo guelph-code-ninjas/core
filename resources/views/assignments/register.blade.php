@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputFile">Upload a document:</label>
-                                <input type="file" class="form-control-file" id="inputFile" multiple>
+                                <input type="file" class="form-control-file" name="aFile" id="newAssignmentFile" multiple required>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Create</button>

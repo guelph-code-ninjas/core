@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
+include "fileValidator.php";
 class AssignmentController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -62,6 +65,11 @@ class AssignmentController extends Controller
         return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining'));
     }
 
+    public function fileCheck(Assignment $assignment){         
+        $result = $assignment->description; 
+        return view('assignments.test', compact('result'));
+    }
+
     public function register(Course $course)
     {
         $cName = $course->name;
@@ -98,6 +106,15 @@ class AssignmentController extends Controller
         $a->similarity = $request->aSimilarity;
         $a->save();
 
-        return redirect()->action('AssignmentController@show', [$course, $a]);
+        //File validator
+       $fileName = $_FILES['aFile']['name'];
+
+        if(typeCheck($fileName, array('zip','php'))){
+            $a->description = "True";
+        } 
+        else{
+            $a->description = "False";
+        }
+        return redirect()->action('AssignmentController@fileCheck', $a);
     }
 }
