@@ -18,12 +18,13 @@ Route::get('/home', 'HomeController@index');
 /* CourseController Routes */
 Route::get('course/register/','CourseController@showRegistration');
 Route::get('course/{course}/enroll', 'CourseController@enroll');
-
+Route::get('course/{course}/settings', 'CourseController@showSettings')->name('courseSettings');
+//Route::get('course/{course}/settings', 'CourseController@storeSettings');
 Route::post('course/register/', 'CourseController@store');
 Route::get('course/{course}','CourseController@show')->name('coursePage');
 
 /* AssignmentController Routes */
-Route::get('course/{course}/assignment/register', 'AssignmentController@register');
+Route::get('course/{course}/assignment/register', 'AssignmentController@register')->name('registerAssignment');
 Route::get('course/{course}/assignment/settings', 'AssignmentController@settings');
 Route::post('course/{course}/assignment/register', 'AssignmentController@store');
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show')->name('courseAssignment');

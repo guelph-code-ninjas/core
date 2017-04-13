@@ -31,7 +31,7 @@ class CourseController extends Controller
         $courseID = $course->name;
         $slug = $course->slug;
 
-        return view('courses.show', compact('courseID', 'slug'), ['assignments' => $assignments]);
+        return view('courses.show', compact('courseID', 'slug', 'course'), ['assignments' => $assignments]);
     }
 
     /**
@@ -64,7 +64,19 @@ class CourseController extends Controller
     */
     public function storeSettings()
     {
-        
+
+    }
+
+    /**
+    * Show the settings page
+    *
+    * @return
+    */
+    public function showSettings(Course $course)
+    {
+        $courses = DB::table('courses')->select('name')->get();
+        $courseName = $course->name;
+        return view('courses.settings', compact('courseName'));
     }
 
     /**
