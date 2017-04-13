@@ -6,6 +6,7 @@ use App\Assignment;
 use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class AssignmentController extends Controller
@@ -59,7 +60,7 @@ class AssignmentController extends Controller
             $remaining .= " Days: " . $interval->d;
         $remaining .= " - " . $interval->h . ":" . $interval->i . ":" . $interval->s;
 
-        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining'));
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining', 'course', 'assignment'));
     }
 
     public function register(Course $course)
@@ -72,6 +73,49 @@ class AssignmentController extends Controller
     {
         $cName = $course->name;
         return view('assignments.settings', compact('cName', 'course'));
+    }
+
+    public function submit(Course $course, Assignment $assignment, Request $request)
+    {
+        $courses = DB::table('courses')->select('slug')->get();
+
+        //Variables for general course and assignment information
+        $aName = $assignment->name;
+        $cName = $course->name;
+
+        //Variables for submission
+        $sTime = Carbon::now();
+        $sName = $request->sName;
+        $sComments = $request->sComments;
+
+        //Submission difference calculation
+        $sRemaining = "";
+        $sRemainingAttach = "";
+        $sRemainingColor = "";
+        
+        if ($sTime > $assignment->due){
+            $interval = date_diff($sTime, new \DateTime($assignment->due));
+            $sRemainingAttach = " late";
+            $sRemainingColor = "red";
+        }else{
+            $interval = date_diff(new \DateTime($assignment->due), $sTime);
+            $sRemainingAttach = " early";
+            $sRemainingColor = "green";
+        }
+
+        //This calculates the difference between the assignment due date
+        //and the current time in EST. Remaining is sent as a fromatted string into the view
+        if($interval->y != 0)
+            $sRemaining .= $interval->y . " year(s) ";
+        if($interval->m != 0)
+            $sRemaining .= $interval->m . " month(s) ";
+        if($interval->d != 0)
+            $sRemaining .= $interval->d . " days(s)";
+        
+        $sRemaining .= " - " . $interval->h . " hour(s) " . $interval->i . " minute(s) " . $interval->s . " second(s) " . $sRemainingAttach;
+
+
+        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'course', 'assignment'));
     }
 
     public function store(Course $course, Request $request)
