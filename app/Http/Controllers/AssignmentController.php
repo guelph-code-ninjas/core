@@ -107,14 +107,14 @@ class AssignmentController extends Controller
         $a->save();
 
         //File validator
-       $fileName = $_FILES['aFile']['name'];
+       /*$fileName = $_FILES['aFile']['name'];
 
         if(typeCheck($fileName, array('zip','php'))){
             $a->description = "True";
         } 
         else{
             $a->description = "False";
-        }
+        }*/ 
         return redirect()->action('AssignmentController@fileCheck', $a);
     }
 }
