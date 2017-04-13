@@ -97,6 +97,7 @@ class AssignmentController extends Controller
         //Getting user ID
         $userID = Auth::id();
         $userIDCheck = DB::table('courses_users')->where('user_id', $userID)->value('course_id');
+        $uName = DB::table('users')->where('id', $userID)->value('name');
 
         //Check if user is enrolled in the course
         if($userIDCheck != $course->id){
@@ -127,7 +128,7 @@ class AssignmentController extends Controller
         $sRemaining .= " - " . $interval->h . " hour(s) " . $interval->i . " minute(s) " . $interval->s . " second(s) " . $sRemainingAttach;
 
 
-        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'test', 'course', 'assignment'));
+        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'uName', 'course', 'assignment'));
     }
 
     public function store(Course $course, Request $request)

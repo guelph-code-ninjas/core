@@ -10,15 +10,14 @@
         	<div class="panel panel-default">
                 <div class="panel-heading">Submission for {{$aName}}</div>
                 <div class="panel-body">
-                	<strong>Your are {{$test}}</strong>
                 	<strong>Submission Name:</strong><br>
                 	{{$sName}}<br>
                 	<strong>Files:</strong><br>
-                	<a href="">TEST</a><br>
+                	<a href="">test</a><br>
                 	<strong>Comments:</strong><br>
                 	{{$sComments}}<br>
                 	<strong>Submitted at: </strong><br>
-                	{{$sTime}}<br>
+                	{{$sTime}}, <i>by {{$uName}}</i><br><br>
                 	<div style="color:{{$sRemainingColor}}">Submitted {{$sRemaining}}</div><br><br>
                 	<center>
 	                	<div class="form-group" style="display:inline-block">
