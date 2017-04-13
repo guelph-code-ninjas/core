@@ -37,9 +37,15 @@
                 <div class="panel-heading">Submissions</div>
                 <div class="panel-body">
                     <strong>Previous submissions</strong><br>
+                    <ul class="list-group">
+                    @foreach( $courseAssignments as $courseName)
+                        <a href="#">
+                            <p class="list-group-item-text">{{$courseName->name}}</p>
+                        </a>
+                    @endforeach
+                    </ul>
 
                     <center><button class="btn btn-success" type="button" data-toggle="collapse" data-target="#submission" style="margin-top:10px; margin-bottom:10px; width: 100%">Submit Assignment</button></center>
-
                     <form method="POST" role="form" action="{{ action('AssignmentController@submit', [$course, $assignment]) }}">
                         {{ csrf_field() }}
                         <div id="submission" class="collapse">

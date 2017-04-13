@@ -51,6 +51,22 @@ class AssignmentController extends Controller
         $currentTime = Carbon::now();
         $interval = date_diff($currentTime, new \DateTime($aDue));
 
+        //Get user ID for previous assignments
+        $userID = Auth::id();
+        $previousAssignments = DB::table('submissions')->where('user_id', $userID)->get(['assignment_id']);
+        $assignmentID = [];
+        $courseName = [];
+
+        foreach($previousAssignments as $aTest){
+            $assignmentID[] = $aTest->assignment_id;
+        }
+
+        $courseAssignments = DB::table('assignments')->whereIn('id', $assignmentID)->get();
+
+        foreach($courseAssignments as $cTest){
+            $courseName = $cTest->name;
+        }
+
         //This calculates the difference between the assignment due date
         //and the current time in EST. Remaining is sent as a formatted string into the view
         if($interval->y != 0)
@@ -61,7 +77,7 @@ class AssignmentController extends Controller
             $remaining .= " Days: " . $interval->d;
         $remaining .= " - " . $interval->h . ":" . $interval->i . ":" . $interval->s;
 
-        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining', 'course', 'assignment'));
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining', 'course', 'assignment', 'courseAssignments'));
     }
 
     public function register(Course $course)
