@@ -96,10 +96,10 @@ class AssignmentController extends Controller
         
         //Getting user ID
         $userID = Auth::id();
-        $test = DB::table('courses_users')->where('user_id', $userID)->value('course_id');
+        $userIDCheck = DB::table('courses_users')->where('user_id', $userID)->value('course_id');
 
         //Check if user is enrolled in the course
-        if($test != $course->id){
+        if($userIDCheck != $course->id){
             abort('403');
         }
 
