@@ -10,6 +10,7 @@
         	<div class="panel panel-default">
                 <div class="panel-heading">Submission for {{$aName}}</div>
                 <div class="panel-body">
+                	<strong>Your are {{$test}}</strong>
                 	<strong>Submission Name:</strong><br>
                 	{{$sName}}<br>
                 	<strong>Files:</strong><br>

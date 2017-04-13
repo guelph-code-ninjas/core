@@ -7,6 +7,7 @@ use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssignmentController extends Controller
@@ -51,7 +52,7 @@ class AssignmentController extends Controller
         $interval = date_diff($currentTime, new \DateTime($aDue));
 
         //This calculates the difference between the assignment due date
-        //and the current time in EST. Remaining is sent as a fromatted string into the view
+        //and the current time in EST. Remaining is sent as a formatted string into the view
         if($interval->y != 0)
             $remaining .= "Years: " . $interval->y;
         if($interval->m != 0)
@@ -93,6 +94,18 @@ class AssignmentController extends Controller
         $sRemainingAttach = "";
         $sRemainingColor = "";
         
+        //Getting user ID
+        $userID = Auth::id();
+        $test = DB::table('courses_users')->where('user_id', $userID)->value('course_id');
+
+        //Check if user is enrolled in the course
+        if($test != $course->id){
+            abort('403');
+        }
+
+        //Checks the difference between due date and submission time
+        //Also sets the text color of the difference and determines whether
+        //the submission is early or late.
         if ($sTime > $assignment->due){
             $interval = date_diff($sTime, new \DateTime($assignment->due));
             $sRemainingAttach = " late";
@@ -102,9 +115,8 @@ class AssignmentController extends Controller
             $sRemainingAttach = " early";
             $sRemainingColor = "green";
         }
-
-        //This calculates the difference between the assignment due date
-        //and the current time in EST. Remaining is sent as a fromatted string into the view
+        
+        //Format the remaining time calculated above
         if($interval->y != 0)
             $sRemaining .= $interval->y . " year(s) ";
         if($interval->m != 0)
@@ -115,7 +127,7 @@ class AssignmentController extends Controller
         $sRemaining .= " - " . $interval->h . " hour(s) " . $interval->i . " minute(s) " . $interval->s . " second(s) " . $sRemainingAttach;
 
 
-        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'course', 'assignment'));
+        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'test', 'course', 'assignment'));
     }
 
     public function store(Course $course, Request $request)
