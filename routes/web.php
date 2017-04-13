@@ -24,8 +24,12 @@ Route::get('course/{course}','CourseController@show')->name('coursePage');
 
 /* AssignmentController Routes */
 Route::get('course/{course}/assignment/register', 'AssignmentController@register');
-Route::get('course/{course}/assignment/settings', 'AssignmentController@settings');
 Route::post('course/{course}/assignment/register', 'AssignmentController@store');
 Route::get('course/{course}/assignment/{assignment}','AssignmentController@show')->name('courseAssignment');
 
+
+Route::get('course/{course}/assignment/{assignment}','AssignmentController@show');
+Route::get('course/{course}/assignment/{assignment}/settings', 'AssignmentController@settings');
+
 Auth::routes();
+
