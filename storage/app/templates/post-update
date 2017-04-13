@@ -1,0 +1,15 @@
+#!/usr/bin/php
+<?php
+include './hooks/environment.php';
+include 'hooks.php';
+
+return postUpdate(
+    [
+        'assignmentId' => $ASSIGNMENT_ID,
+        'studentId' => $STUDENT_ID,
+        'assignmentPath' => $ASSIGNMENT_DIR,
+        'laravelStorage' => $LARAVEL_STORAGE
+    ],
+    $argv[1]
+);
+?>

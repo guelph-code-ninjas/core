@@ -36,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}" >
-                        <img src="img/sub_assistant_logo_black.png" alt="Submission Assistant Logo" height="110%" style="float:left; padding-right:10px">
+                        <img src="/img/sub_assistant_logo_black.png" alt="Submission Assistant Logo" height="110%" style="float:left; padding-right:10px">
                         {{ config('app.name') }}
                     </a>
                 </div>
