@@ -28,31 +28,31 @@
                             <label for="newAssignmentExpected">Expected File Types</label>
                             <div class="form-group control-group" id="newAssignmentExpected">
                                 <label class="control control--checkbox">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="checkGroup[]">
                                     .doc
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .docx
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .pdf
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .txt
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .zip
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .tar
                                 </label>
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" style="margin-left:8px">
+                                    <input type="checkbox" name="checkGroup[]" style="margin-left:8px">
                                     .tar.gz
                                 </label>
                                 <br>

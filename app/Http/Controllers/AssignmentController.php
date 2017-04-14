@@ -65,8 +65,8 @@ class AssignmentController extends Controller
         return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining'));
     }
 
-    public function fileCheck(Assignment $assignment){         
-        $result = $assignment->description; 
+    public function fileCheck($assignmentID){         
+        $result = $assignmentID; 
         return view('assignments.test', compact('result'));
     }
 
@@ -105,16 +105,15 @@ class AssignmentController extends Controller
         $a->name = $request->aName;
         $a->similarity = $request->aSimilarity;
         $a->save();
+        
+        $file = $request->aFile;
 
-        //File validator
-       /*$fileName = $_FILES['aFile']['name'];
-
-        if(typeCheck($fileName, array('zip','php'))){
-            $a->description = "True";
+        if(typeCheck($file, array('zip','php'))){
+            $result = "True: Passed type check";
         } 
         else{
-            $a->description = "False";
-        }*/ 
-        return redirect()->action('AssignmentController@fileCheck', $a);
+            $result = "False: not a zip or php file";
+        } 
+        return redirect()->action('AssignmentController@fileCheck', [$result]);
     }
 }
