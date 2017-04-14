@@ -62,9 +62,42 @@ class CourseController extends Controller
     *
     * @return
     */
-    public function storeSettings()
+    public function storeSettings(Course $course, Request $request)
+    {
+        // validate the input before storing it into the database
+        $this->validate($request,[
+            'courseName' => 'required',
+            'courseSemester' => 'required',
+            'courseSection' => 'required'
+        ]);
+
+        // if any of the fields are null, bring them back to the registration page (did not select an option)
+        if($request->courseName == null || $request->courseSemester == null || $request->courseSection == null) {
+            return back()->withInput();
+        }
+
+        // create slug
+        $slug = $request->courseName . '_' . $request->courseSemester . '_' . $request->courseSection;
+
+        // sanitize the slug
+
+        //update data into the database
+
+        //find course in database
+        DB::table('courses')->where('id', $course->id)->update(['name' => $request->courseName]);
+        DB::table('courses')->where('id', $course->id)->update(['slug' => $slug]);
+
+        $c = DB::table('courses')->select('id', 'name', 'slug')->where('id', $course->id)->get();
+
+        return view('courses.successSettings', ['course' => $c]);
+
+    //    return redirect()->action('CourseController@showSuccess', ['course' => $c]);
+    }
+
+    public function showSuccess(Course $course)
     {
 
+        return view('courses.successSettings', ['course' => $course]);
     }
 
     /**
@@ -76,7 +109,7 @@ class CourseController extends Controller
     {
         $courses = DB::table('courses')->select('name')->get();
         $courseName = $course->name;
-        return view('courses.settings', compact('courseName'));
+        return view('courses.settings', compact('courseName', 'course'));
     }
 
     /**
