@@ -6,6 +6,8 @@ use App\Assignment;
 use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssignmentController extends Controller
@@ -49,8 +51,24 @@ class AssignmentController extends Controller
         $currentTime = Carbon::now();
         $interval = date_diff($currentTime, new \DateTime($aDue));
 
+        //Get user ID for previous assignments
+        $userID = Auth::id();
+        $previousAssignments = DB::table('submissions')->where('user_id', $userID)->get(['assignment_id']);
+        $assignmentID = [];
+        $courseName = [];
+
+        foreach($previousAssignments as $aTest){
+            $assignmentID[] = $aTest->assignment_id;
+        }
+
+        $courseAssignments = DB::table('assignments')->whereIn('id', $assignmentID)->get();
+
+        foreach($courseAssignments as $cTest){
+            $courseName = $cTest->name;
+        }
+
         //This calculates the difference between the assignment due date
-        //and the current time in EST. Remaining is sent as a fromatted string into the view
+        //and the current time in EST. Remaining is sent as a formatted string into the view
         if($interval->y != 0)
             $remaining .= "Years: " . $interval->y;
         if($interval->m != 0)
@@ -59,7 +77,7 @@ class AssignmentController extends Controller
             $remaining .= " Days: " . $interval->d;
         $remaining .= " - " . $interval->h . ":" . $interval->i . ":" . $interval->s;
 
-        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining'));
+        return view('assignments.show', compact('cName', 'aName', 'aDescription', 'aDue', 'aStart', 'aSimilarity', 'remaining', 'course', 'assignment', 'courseAssignments'));
     }
 
     public function register(Course $course)
@@ -72,6 +90,61 @@ class AssignmentController extends Controller
     {
         $cName = $course->name;
         return view('assignments.settings', compact('cName', 'course'));
+    }
+
+    public function submit(Course $course, Assignment $assignment, Request $request)
+    {
+        $courses = DB::table('courses')->select('slug')->get();
+
+        //Variables for general course and assignment information
+        $aName = $assignment->name;
+        $cName = $course->name;
+
+        //Variables for submission
+        $sTime = Carbon::now();
+        $sName = $request->sName;
+        $sComments = $request->sComments;
+
+        //Submission difference calculation
+        $sRemaining = "";
+        $sRemainingAttach = "";
+        $sRemainingColor = "";
+        
+        //Getting user ID
+        $userID = Auth::id();
+        $userIDCheck = DB::table('courses_users')->where('user_id', $userID)->value('course_id');
+        $uName = DB::table('users')->where('id', $userID)->value('name');
+
+        //Check if user is enrolled in the course
+        if($userIDCheck != $course->id){
+            abort('403');
+        }
+
+        //Checks the difference between due date and submission time
+        //Also sets the text color of the difference and determines whether
+        //the submission is early or late.
+        if ($sTime > $assignment->due){
+            $interval = date_diff($sTime, new \DateTime($assignment->due));
+            $sRemainingAttach = " late";
+            $sRemainingColor = "red";
+        }else{
+            $interval = date_diff(new \DateTime($assignment->due), $sTime);
+            $sRemainingAttach = " early";
+            $sRemainingColor = "green";
+        }
+        
+        //Format the remaining time calculated above
+        if($interval->y != 0)
+            $sRemaining .= $interval->y . " year(s) ";
+        if($interval->m != 0)
+            $sRemaining .= $interval->m . " month(s) ";
+        if($interval->d != 0)
+            $sRemaining .= $interval->d . " days(s)";
+        
+        $sRemaining .= " - " . $interval->h . " hour(s) " . $interval->i . " minute(s) " . $interval->s . " second(s) " . $sRemainingAttach;
+
+
+        return view ('assignments.submit', compact('cName', 'aName', 'sTime', 'sName', 'sComments', 'sRemaining', 'sRemainingColor', 'uName', 'course', 'assignment'));
     }
 
     public function store(Course $course, Request $request)
